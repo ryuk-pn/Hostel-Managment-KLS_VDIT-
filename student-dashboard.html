@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Dashboard - KLS VDIT Hostel Management</title>
+    <style>
+        /* Reset CSS */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* Global Styles */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            margin: 0; /* Remove default margin */
+            overflow: hidden; /* Hide scrollbars */
+            background-image: url("/images/pngtree.jpg"); /* Add background image */
+            background-size: 110% auto; /* Stretch to cover full screen lengthwise */
+            background-position: center;
+        }
+
+        /* Header Styles */
+        header {
+            background-color: #333;
+            color: white;
+            padding: 20px 0; /* Increased padding to make the header bigger */
+            text-align: center;
+            position: relative;
+            z-index: 2; /* Ensure header appears above other content */
+        }
+
+        .logo {
+            display: inline-block;
+            vertical-align: middle;
+        }
+
+        .logo img {
+            height: 50px; /* Adjust as needed */
+            border-radius: 50%;
+        }
+
+        .college-name {
+            display: inline-block;
+            vertical-align: middle;
+            margin-left: 10px;
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        /* Main Content Styles */
+        main {
+            padding-top: 20px;
+        }
+
+        .container {
+            max-width: 1200px; /* Adjust as needed */
+            margin: 0 auto;
+            background-color: transparent; /* Make container background transparent */
+            display: flex;
+            flex-wrap: wrap; /* Enable wrapping of flex items */
+            justify-content: space-between;
+        }
+
+        h1 {
+            width: 100%; /* Ensure the heading takes the full width */
+            margin-bottom: 20px;
+            font-size: 24px;
+            color: white; /* Adjust text color */
+            text-align: center;
+        }
+
+        /* Card Styles */
+        .card {
+            width: calc(33.333% - 20px); /* Each card takes 33.333% of the width with some margin */
+            background-color: rgba(255, 255, 255, 0.8); /* Semi-transparent white background for cards */
+            border-radius: 10px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            margin-bottom: 20px; /* Add margin between rows */
+            visibility: hidden; /* Initially invisible */
+            overflow: hidden; /* Hide overflow content */
+        }
+
+        .card h2 {
+            color: black; /* Adjust text color */
+            word-wrap: break-word;
+            overflow-wrap: break-word;
+            white-space: normal;
+        }
+
+        .card p, .card ul, .card textarea {
+            word-wrap: break-word;
+            overflow-wrap: break-word;
+            white-space: normal;
+            max-height: 150px; /* Set a maximum height */
+            overflow-y: auto; /* Make content scrollable if it exceeds the max height */
+        }
+
+        textarea {
+            width: 100%;
+            padding: 10px;
+            margin-top: 10px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            resize: vertical;
+        }
+
+        button {
+            margin-top: 10px;
+            padding: 10px 20px;
+            border-radius: 5px;
+            border: none;
+            background-color: #007bff; /* Adjust button background color */
+            color: white;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: #0056b3; /* Adjust button hover background color */
+        }
+    </style>
+</head>
+<body>
+    <!-- Header Section -->
+    <header>
+        <div class="logo">
+            <img src="/images/logokls.png" alt="College Logo">
+        </div>
+        <div class="college-name">
+            KLS Vishwanathrao Deshpande Institute of Technology Haliyal
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main>
+        <div class="container">
+            <h1>Welcome to Student Dashboard</h1>
+
+            <!-- Room Allocation Card -->
+            <div class="card room-card">
+                <h2>Room Allocation</h2>
+                <p id="roomNumber"></p>
+            </div>
+
+            <!-- Attendance Card -->
+            <div class="card attendance-card">
+                <h2>Attendance</h2>
+                <button type="button">Present</button>
+            </div>
+
+            <!-- Complaints and Suggestions Card -->
+            <div class="card complaints-card" >
+                <h2>Complaints and Suggestions</h2>
+                <textarea placeholder="Enter your complaint or suggestion here..." id="input"></textarea>
+                <button type="submit" id="complaint">Submit</button>
+            </div>
+
+            <!-- Announcement Card -->
+            <div class="card announcement-card">
+                <h2>Announcements</h2>
+                <ul>
+                    <li>Announcement 1: This is a very long announcement text to test the overflow handling of the card. It should wrap correctly within the card boundaries.</li>
+                    <li>Announcement 2</li>
+                    <li>Announcement 3</li>
+                    <!-- Add more announcements as needed -->
+                </ul>
+            </div>
+
+            <!-- Fees Details Card -->
+            <div class="card fees-card">
+                <h2>Fees Details</h2>
+                <p>Fees Paid: 500</p>
+                <p>Balance Fees: 200</p>
+                <!-- Add more details as needed -->
+            </div>
+
+            <!-- Leave Application Card -->
+            <div class="card leave-card">
+                <h2>Leave Application</h2>
+                <button onclick="window.location.href='leave.html'">Request Leave</button>
+            </div>
+        </div>
+    </main>
+
+    <script type="module">
+        // Simulating room allocation dynamically
+        document.addEventListener("DOMContentLoaded", function() {
+            // Simulate fetching room number from database or API
+            var roomNumber = "Room Number 12"; // Example room number
+            var roomParagraph = document.getElementById("roomNumber");
+            roomParagraph.textContent = roomNumber;
+
+            // Make room card visible
+            var roomCard = document.querySelector(".room-card");
+            roomCard.style.visibility = "visible";
+
+            // Make attendance card visible
+            var attendanceCard = document.querySelector(".attendance-card");
+            attendanceCard.style.visibility = "visible";
+
+            // Make complaints card visible
+            var complaintsCard = document.querySelector(".complaints-card");
+            complaintsCard.style.visibility = "visible";
+
+            // Make announcement card visible
+            var announcementCard = document.querySelector(".announcement-card");
+            announcementCard.style.visibility = "visible";
+
+            // Make fees card visible
+            var feesCard = document.querySelector(".fees-card");
+            feesCard.style.visibility = "visible";
+
+            // Make leave card visible
+            var leaveCard = document.querySelector(".leave-card");
+            leaveCard.style.visibility = "visible";
+        });
+
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+        import { getFirestore, addDoc,collection,doc,setDoc } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+        // TODO: Add SDKs for Firebase products that you want to use
+        // https://firebase.google.com/docs/web/setup#available-libraries
+      
+        // Your web app's Firebase configuration
+        // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+        const firebaseConfig = {
+          apiKey: "AIzaSyCcM-0jBvqFD0Wfdt2GNzTIKLiFD9dMBgk",
+          authDomain: "hostel-7775c.firebaseapp.com",
+          projectId: "hostel-7775c",
+          storageBucket: "hostel-7775c.appspot.com",
+          messagingSenderId: "607056018245",
+          appId: "1:607056018245:web:52e26d298d32e16d461c2c",
+          measurementId: "G-WZJRB26LW3"
+        };
+      
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const submit = document.getElementById("complaint");
+        submit.addEventListener("click",(event)=>{
+            event.preventDefault();
+            const input = document.getElementById("input").value;
+            const db = getFirestore();
+
+            const userData ={
+                compaint: input
+            };
+            const value= doc(db,"users", 'complaints');
+      const collectionval = collection(value,"details");
+      addDoc(collectionval,userData)
+      .then(()=>{
+        alert("Complaint Registered Sucessfully");
+        window.location.href='/student-dashboard.html'
+      })
+      .catch((error)=>{
+       alert("Error creating user");""
+        console.error("error creating user", error);
+      })
+        })
+
+
+    </script>
+   
+</body>
+</html>
